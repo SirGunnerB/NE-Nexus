@@ -9,6 +9,10 @@ import store from './redux/store';
 import Login from './pages/auth/Login';
 import Register from './pages/auth/Register';
 
+// Dashboard
+import Dashboard from './pages/dashboard/Dashboard';
+import DashboardLayout from './components/layout/DashboardLayout';
+
 // Theme configuration
 const theme = createTheme({
   palette: {
@@ -27,7 +31,7 @@ const ProtectedRoute = ({ children }) => {
   if (!token) {
     return <Navigate to="/login" />;
   }
-  return children;
+  return <DashboardLayout>{children}</DashboardLayout>;
 };
 
 function App() {
@@ -46,13 +50,33 @@ function App() {
               path="/dashboard"
               element={
                 <ProtectedRoute>
-                  <div>Dashboard (Coming Soon)</div>
+                  <Dashboard />
+                </ProtectedRoute>
+              }
+            />
+            
+            {/* Add more protected routes here */}
+            <Route
+              path="/dashboard/*"
+              element={
+                <ProtectedRoute>
+                  <Routes>
+                    <Route path="jobs" element={<div>Jobs Page (Coming Soon)</div>} />
+                    <Route path="candidates" element={<div>Candidates Page (Coming Soon)</div>} />
+                    <Route path="companies" element={<div>Companies Page (Coming Soon)</div>} />
+                    <Route path="reports" element={<div>Reports Page (Coming Soon)</div>} />
+                    <Route path="settings" element={<div>Settings Page (Coming Soon)</div>} />
+                    <Route path="profile" element={<div>Profile Page (Coming Soon)</div>} />
+                  </Routes>
                 </ProtectedRoute>
               }
             />
             
             {/* Redirect root to login */}
             <Route path="/" element={<Navigate to="/login" />} />
+            
+            {/* Catch all route */}
+            <Route path="*" element={<Navigate to="/dashboard" />} />
           </Routes>
         </Router>
       </ThemeProvider>
