@@ -1,18 +1,20 @@
 const { Sequelize } = require('sequelize');
+const path = require('path');
+const electron = require('electron');
+
+// Get the user data path from Electron
+const userDataPath = (electron.app || electron.remote.app).getPath('userData');
+
+// Create a database file in the user's application data directory
+const dbPath = path.join(userDataPath, 'database.sqlite');
 
 const sequelize = new Sequelize({
-  dialect: 'postgres',
-  host: process.env.DB_HOST || 'localhost',
-  port: process.env.DB_PORT || 5432,
-  username: process.env.DB_USER || 'postgres',
-  password: process.env.DB_PASSWORD || 'postgres',
-  database: process.env.DB_NAME || 'recruitment_platform',
+  dialect: 'sqlite',
+  storage: dbPath,
   logging: false,
-  pool: {
-    max: 5,
-    min: 0,
-    acquire: 30000,
-    idle: 10000
+  define: {
+    timestamps: true,
+    underscored: true
   }
 });
 

@@ -14,12 +14,13 @@ NE Nexus is an all-in-one recruitment platform that combines Applicant Tracking 
 - Onboarding Management
 - AI-Powered Job Matching
 - Advanced Analytics
+- Built-in SQLite Database
 
 ## Tech Stack
 
 - Frontend: Electron + React
 - Backend: Node.js + Express
-- Database: PostgreSQL
+- Database: SQLite (built into the application)
 - ORM: Sequelize
 
 ## Getting Started
@@ -27,7 +28,6 @@ NE Nexus is an all-in-one recruitment platform that combines Applicant Tracking 
 ### Prerequisites
 
 - Node.js (v14 or higher)
-- PostgreSQL
 - Git
 
 ### Installation
@@ -44,9 +44,7 @@ npm install
 cd client && npm install && cd ..
 ```
 
-3. Create a PostgreSQL database named `recruitment_platform`
-
-4. Start the development environment:
+3. Start the development environment:
 ```bash
 npm run dev
 ```
@@ -55,6 +53,8 @@ This will start:
 - Electron application
 - React development server
 - Express backend server
+
+The SQLite database will be automatically created in your application data directory when the application first runs.
 
 ## Contributing
 
