@@ -13,6 +13,11 @@ import Register from './pages/auth/Register';
 import Dashboard from './pages/dashboard/Dashboard';
 import DashboardLayout from './components/layout/DashboardLayout';
 
+// Job pages
+import JobList from './pages/jobs/JobList';
+import JobForm from './pages/jobs/JobForm';
+import JobDetail from './pages/jobs/JobDetail';
+
 // Theme configuration
 const theme = createTheme({
   palette: {
@@ -55,13 +60,46 @@ function App() {
               }
             />
             
-            {/* Add more protected routes here */}
+            {/* Job routes */}
+            <Route
+              path="/dashboard/jobs"
+              element={
+                <ProtectedRoute>
+                  <JobList />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/dashboard/jobs/create"
+              element={
+                <ProtectedRoute>
+                  <JobForm />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/dashboard/jobs/edit/:id"
+              element={
+                <ProtectedRoute>
+                  <JobForm />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/dashboard/jobs/:id"
+              element={
+                <ProtectedRoute>
+                  <JobDetail />
+                </ProtectedRoute>
+              }
+            />
+            
+            {/* Other dashboard routes */}
             <Route
               path="/dashboard/*"
               element={
                 <ProtectedRoute>
                   <Routes>
-                    <Route path="jobs" element={<div>Jobs Page (Coming Soon)</div>} />
                     <Route path="candidates" element={<div>Candidates Page (Coming Soon)</div>} />
                     <Route path="companies" element={<div>Companies Page (Coming Soon)</div>} />
                     <Route path="reports" element={<div>Reports Page (Coming Soon)</div>} />
