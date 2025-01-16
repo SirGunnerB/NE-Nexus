@@ -3,6 +3,7 @@ const path = require('path');
 const cors = require('cors');
 const sequelize = require('./config/database');
 const authRoutes = require('./routes/auth');
+const jobRoutes = require('./routes/jobs');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -14,6 +15,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // Routes
 app.use('/api/auth', authRoutes);
+app.use('/api/jobs', jobRoutes);
 
 // Basic health check route
 app.get('/api/health', (req, res) => {
