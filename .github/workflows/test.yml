@@ -41,14 +41,14 @@ jobs:
         CI: true
     
     - name: Upload Server Coverage
-      uses: codecov/codecov-action@v3
+      uses: codecov/codecov-action@v5
       with:
         token: ${{ secrets.CODECOV_TOKEN }}
         flags: server
         directory: ./coverage
     
     - name: Upload Client Coverage
-      uses: codecov/codecov-action@v3
+      uses: codecov/codecov-action@v5
       with:
         token: ${{ secrets.CODECOV_TOKEN }}
         flags: client
