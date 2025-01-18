@@ -28,9 +28,28 @@ jobs:
         npm ci
         cd client && npm ci
     
-    - name: Run Tests
+    - name: Run Linting
       run: |
-        npm test
-        cd client && npm test
+        npm run lint
+        cd client && npm run lint
+    
+    - name: Run Tests with Coverage
+      run: |
+        npm run test:coverage
+        cd client && npm run test:coverage
       env:
-        CI: true 
+        CI: true
+    
+    - name: Upload Server Coverage
+      uses: codecov/codecov-action@v3
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
+        flags: server
+        directory: ./coverage
+    
+    - name: Upload Client Coverage
+      uses: codecov/codecov-action@v3
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
+        flags: client
+        directory: ./client/coverage 
