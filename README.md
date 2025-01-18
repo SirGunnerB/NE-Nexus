@@ -1,39 +1,25 @@
-# NE Nexus - Modern Recruitment Platform
+# NE-Nexus: Desktop Recruitment Platform
 
-A modern, feature-rich recruitment platform built with React, Node.js, and Material-UI. NE Nexus provides a seamless experience for both recruiters and job seekers with a beautiful, responsive UI and powerful features.
+A modern desktop application for managing job postings and applications, built with Electron, React, and Express.
 
 ## Features
 
-### For Recruiters
-- **Job Management**: Create, edit, and manage job postings with rich details
-- **Candidate Tracking**: Review applications and track candidate progress
-- **Analytics Dashboard**: Get insights into job performance and recruitment metrics
-- **Customizable Workflow**: Define custom recruitment stages and processes
+- 🔒 Secure authentication and user management
+- 💼 Job posting creation and management
+- 📝 Application tracking system
+- 👥 Candidate profile management
+- 📧 Email notifications
+- 🌓 Dark/Light theme support
+- 🔄 Offline-first capability
+- 🚀 Cross-platform support (Windows, macOS, Linux)
 
-### For Job Seekers
-- **Smart Job Search**: Find relevant jobs with advanced filters and search
-- **Easy Applications**: Apply to jobs with a streamlined application process
-- **Application Tracking**: Monitor application status and updates
-- **Profile Management**: Maintain professional profile and resume
+## Prerequisites
 
-## Technical Features
-- 🎨 Modern UI with Material-UI components
-- 🌓 Light/Dark theme support
-- 🎯 Responsive design for all devices
-- 🔒 Secure authentication and authorization
-- 📊 Real-time notifications
-- 🚀 Optimized performance
-- 🔍 Advanced search and filtering
-- 📱 Progressive Web App (PWA) support
-
-## Getting Started
-
-### Prerequisites
-- Node.js (v14 or higher)
+- Node.js 18.x
 - npm or yarn
-- SQLite (for development)
+- Git
 
-### Installation
+## Installation
 
 1. Clone the repository:
 ```bash
@@ -43,96 +29,73 @@ cd NE-Nexus
 
 2. Install dependencies:
 ```bash
-# Install server dependencies
 npm install
-
-# Install client dependencies
-cd client
-npm install
+cd client && npm install && cd ..
 ```
 
-3. Create environment files:
+3. Create a `.env` file in the root directory:
 ```bash
-# In root directory
-cp .env.example .env
-
-# In client directory
-cd client
 cp .env.example .env
 ```
 
-4. Start the development servers:
+4. Update the environment variables in `.env` with your configuration.
+
+## Development
+
+Start the application in development mode:
+
 ```bash
-# Start both client and server in development mode
 npm run dev
 ```
 
-The application will be available at:
-- Frontend: http://localhost:3000
-- Backend API: http://localhost:5000
+This will start:
+- The Electron application
+- React development server
+- Express API server
 
-## Project Structure
+## Building
 
-```
-NE-Nexus/
-├── client/                 # React frontend
-│   ├── public/            # Static files
-│   └── src/
-│       ├── components/    # Reusable components
-│       ├── hooks/         # Custom React hooks
-│       ├── pages/         # Page components
-│       ├── theme/         # Theme configuration
-│       └── utils/         # Utility functions
-├── config/                # Server configuration
-├── models/                # Database models
-├── routes/                # API routes
-├── middleware/            # Custom middleware
-└── server.js             # Express server
+Build the application for production:
+
+```bash
+npm run build
+npm run package
 ```
 
-## Available Scripts
+The packaged application will be available in the `dist` directory.
 
-### Root Directory
-- `npm run dev`: Start both client and server in development mode
-- `npm run server`: Start server with nodemon
-- `npm run client`: Start React development server
-- `npm run build`: Build the client for production
-- `npm start`: Start production server
+## Testing
 
-### Client Directory
-- `npm start`: Start development server
-- `npm run build`: Build for production
-- `npm test`: Run tests
-- `npm run eject`: Eject from Create React App
+Run the test suite:
 
-## Environment Variables
-
-### Server (.env)
-```
-PORT=5000
-NODE_ENV=development
-JWT_SECRET=your_jwt_secret
-```
-
-### Client (.env)
-```
-REACT_APP_API_URL=http://localhost:5000/api
+```bash
+npm test
 ```
 
 ## Contributing
 
+We welcome contributions! Please see our [Contributing Guidelines](CONTRIBUTING.md) for details.
+
 1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
 
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
+## Support
+
+If you encounter any issues or have questions:
+1. Check the [FAQ](docs/FAQ.md)
+2. Search through [existing issues](https://github.com/SirGunnerB/NE-Nexus/issues)
+3. Open a new issue if needed
+
 ## Acknowledgments
 
-- Material-UI for the amazing component library
-- React team for the awesome framework
-- All contributors who have helped shape this project 
+- Built with [Electron](https://www.electronjs.org/)
+- UI powered by [React](https://reactjs.org/)
+- Backend API with [Express](https://expressjs.com/)
+- Database management using [Sequelize](https://sequelize.org/) 
