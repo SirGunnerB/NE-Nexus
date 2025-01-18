@@ -1,26 +1,42 @@
+require('dotenv').config();
+
 const express = require('express');
-const path = require('path');
 const cors = require('cors');
-const sequelize = require('./config/database');
+const path = require('path');
+const { sequelize } = require('./models');
+
+// Import routes
 const authRoutes = require('./routes/auth');
 const jobRoutes = require('./routes/jobs');
+const applicationRoutes = require('./routes/applications');
 
 const app = express();
-const PORT = process.env.PORT || 3001;
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: ['http://localhost:5001', 'file://*'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true
+}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Routes
+// Serve static files from the React app in production
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, 'client/build')));
+}
+
+// API Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/jobs', jobRoutes);
+app.use('/api/applications', applicationRoutes);
 
-// Basic health check route
-app.get('/api/health', (req, res) => {
-  res.json({ status: 'OK', message: 'Server is running' });
-});
+// Catch-all route for React app in production
+if (process.env.NODE_ENV === 'production') {
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'client/build/index.html'));
+  });
+}
 
 // Error handling middleware
 app.use((err, req, res, next) => {
@@ -28,23 +44,10 @@ app.use((err, req, res, next) => {
   res.status(500).json({ message: 'Something went wrong!' });
 });
 
-// Test database connection and sync models
-async function initializeDatabase() {
-  try {
-    await sequelize.authenticate();
-    console.log('Database connection established successfully.');
-    
-    // Sync all models
-    await sequelize.sync({ alter: true });
-    console.log('Database models synchronized successfully.');
-  } catch (error) {
-    console.error('Unable to connect to the database:', error);
-  }
-}
+// Initialize database
+sequelize.sync({ alter: process.env.NODE_ENV === 'development' })
+  .catch(err => {
+    console.error('Unable to connect to the database:', err);
+  });
 
-initializeDatabase();
-
-// Start server
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-}); 
+module.exports = app; 
